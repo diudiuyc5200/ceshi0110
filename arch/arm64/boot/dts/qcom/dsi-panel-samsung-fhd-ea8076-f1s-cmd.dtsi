@@ -37,7 +37,7 @@
 		qcom,mdss-dsi-lane-1-state;
 		qcom,mdss-dsi-lane-2-state;
 		qcom,mdss-dsi-lane-3-state;
-		qcom,mdss-brightness-max-level = <2047>;
+		qcom,mdss-brightness-max-level = <4095>;
 		qcom,bl-update-flag = "delay_until_first_frame";
 		qcom,mdss-dsi-dma-trigger = "trigger_sw";
 		qcom,mdss-dsi-mdp-trigger = "none";
@@ -61,12 +61,37 @@
 		qcom,mdss-dsi-panel-fod-dimlayer-enabled;
 
 		qcom,dispparam-enabled;
-		qcom,mdss-panel-on-dimming-delay = <200>;
+		qcom,mdss-panel-on-dimming-delay = <120>;
 		qcom,mdss-dsi-panel-dc-threshold = <610>;
 		/* IRQF_ONESHOT | IRQF_TRIGGER_FALLING */
 		qcom,esd-err-irq-gpio = <&tlmm 5 0x2002>;
 
 		qcom,disp-doze-backlight-threshold = <8>;
+		qcom,disp-fod-off-dimming-delay = <85>;
+		qcom,disp-fod-dim-lut = <
+			/* brightness, alpha */
+			0	0xFF
+			4	0xEB
+			8	0xEA
+			12	0xE9
+			13	0xE8
+			20	0xE5
+			24	0xE3
+			30	0xE0
+			68	0xD0
+			133	0xC0
+			218	0xB0
+			328	0xA0
+			486	0x90
+			642	0x80
+			832	0x70
+			1043	0x60
+			1267	0x50
+			1500	0x40
+			1770	0x30
+			2000	0x24
+			2047	0x21
+		>;
 
 		qcom,elvss_dimming_check_enable;
 		qcom,mdss-dsi-panel-elvss-dimming-read-length = <1>;
@@ -115,11 +140,6 @@
 					39 01 00 00 01 00 02 53 E0];
 		qcom,mdss-dsi-dispparam-hbm-fod-on-command-state = "dsi_lp_mode";
 
-		/* WHITE POINT COMMAND */
-		qcom,mdss-dsi-panel-white-point-read-length = <8>;
-		qcom,mdss-dsi-dispparam-whitepoint-read-command = [06 01 00 01 00 00 01 EF];
-		qcom,mdss-dsi-dispparam-whitepoint-read-command-state = "dsi_lp_mode";
-
 		qcom,mdss-dsi-display-timings {
 			timing@0{
 				qcom,mdss-dsi-panel-width = <1080>;
@@ -129,7 +149,7 @@
 				qcom,mdss-dsi-h-pulse-width = <20>;
 				qcom,mdss-dsi-h-sync-skew = <0>;
 				qcom,mdss-dsi-v-back-porch = <64>;
-				qcom,mdss-dsi-v-front-porch = <88>;
+				qcom,mdss-dsi-v-front-porch = <64>;
 				qcom,mdss-dsi-v-pulse-width = <20>;
 				qcom,mdss-dsi-h-left-border = <0>;
 				qcom,mdss-dsi-h-right-border = <0>;
@@ -307,7 +327,7 @@
 				qcom,mdss-dsi-v-top-border = <0>;
 				qcom,mdss-dsi-v-bottom-border = <0>;
 				qcom,mdss-dsi-panel-framerate = <90>;
-				qcom,mdss-dsi-panel-clockrate = <1517000000>;
+				qcom,mdss-dsi-panel-clockrate = <1628000000>;
 				qcom,mdss-dsi-panel-jitter = <0x5 0x1>;
 				qcom,mdss-dsi-on-command = [
 					39 00 00 00 00 00 03 F0 5A 5A
@@ -447,20 +467,6 @@
 					39 00 00 00 00 00 02 B7 91
 					39 01 00 00 01 00 03 F0 A5 A5];
 				qcom,mdss-dsi-dispparam-elvss-dimming-off-command-state = "dsi_lp_mode";
-				qcom,mdss-dsi-dispparam-flat-on-command = [
-					39 01 00 00 00 00 03 F0 5A 5A
-					39 01 00 00 00 00 1D BE 82 29 00 00 00 30 30 30 40 40 40 4B 4B 4B 50 50 50 5C 4D 89 9B 73 00 33 69 12 7A 70
-					39 01 00 00 00 00 02 F7 01
-					39 01 00 00 00 00 03 F0 A5 A5
-					];
-				qcom,mdss-dsi-dispparam-flat-on-command-state = "dsi_lp_mode";
-				qcom,mdss-dsi-dispparam-flat-off-command = [
-					39 01 00 00 00 00 03 F0 5A 5A
-					39 01 00 00 00 00 1D BE 82 09 00 00 00 30 30 30 40 40 40 4B 4B 4B 50 50 50 5C 4D 89 CB B8 00 33 69 12 7A 70
-					39 01 00 00 00 00 02 F7 01
-					39 01 00 00 00 00 03 F0 A5 A5
-					];
-				qcom,mdss-dsi-dispparam-flat-off-command-state = "dsi_lp_mode";
 				qcom,mdss-dsi-h-sync-pulse = <0>;
 			};
 		};
